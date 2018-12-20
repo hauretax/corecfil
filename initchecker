@@ -11,6 +11,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+GIT=vogsphere@vogsphere.42.fr:intra/2018/activities/init/hutricot
+
 # Text format
 _DEF='\033[0m'
 _GRAS='\033[1m'
@@ -40,6 +42,7 @@ _IGREY='\033[47m'
 
 # Start PWD
 SPWD=$(pwd)
+TIME=0.1
 
 function header()
 {
@@ -66,13 +69,13 @@ function networkpart()
 		echo -en "you have wrote this :  "
 		echo -e " $RES"
 	fi
-	sleep .5
+	sleep $TIME
 	#question 2
 	RES1=$(cat 02 | head -n 1)
 	RES=$(cat 02 | tail -n 1)
 	echo -e "02 a) : $RES1"
 	echo -e "02 b) : $RES"
-	sleep .5
+	sleep $TIME
 	#question 3
 	RES=$(sh 03)
 	RRES=$(ifconfig -a | grep 'en1' -C 1 | grep 'ether' | awk '{print $2}')
@@ -83,7 +86,7 @@ function networkpart()
 		echo -en "you have wrote this :  "
 		echo -e " $RES"
 	fi
-	sleep .5
+	sleep $TIME
 	#question 4
 	RES=$(sh 04)
 	RRES=$(route -n get default | grep 'gateway' | awk '{print$2}')
@@ -94,7 +97,7 @@ function networkpart()
 		echo -en "you have wrote this :  "
 		echo -e " $RES"
 	fi
-	sleep .5
+	sleep $TIME
 	#question 5
 	RES=$(sh 05)
 	RRES=$(nslookup slash16.org | grep 'Server' | awk '{print$2}')
@@ -105,11 +108,11 @@ function networkpart()
 		echo -en "you have wrote this :  "
 		echo -e " $RES"
 	fi
-	sleep .5
+	sleep $TIME
 	#question 6
 	RES=$(cat 06)
 	echo -e "06 : $RES"
-	sleep .5
+	sleep $TIME
 	#question 7
 	RES=$(cat 07)
 	if [ "$RES" == "nslookup slash16.org 8.8.8.8" ]; then
@@ -119,28 +122,11 @@ function networkpart()
 		echo -en "you have wrote this :  "
 		echo -e " $RES"
 	fi
-	sleep .5
+	sleep $TIME
 	#question 8
 	echo -en "08 "
-	grep "Amazon" 08
-	if [ $? ==  0 ]; then
-		echo -e "08 $_GREEN[OK] $_DEF"
-	else
-		grep "aws" 08
-		if [ $? ==  0 ]; then
-			echo -e "08 $_GREEN[OK] $_DEF"
-		else	
-			grep "AWS" 08
-			if [ $? ==  0 ]; then
-				echo -e "08 $_GREEN[OK] $_DEF"
-			else	
-				echo -e "08 $_RED[KO] $_DEF"
-				echo -en "you have wrote this :  "
-				echo -e " $RES"
-			fi
-		fi
-	fi
-	sleep .5
+	cat 08
+	sleep $TIME
 	#question 9
 	RES=$(cat 09)
 	if [ "$RES" ==  "163.172.250.12" ] \
@@ -152,9 +138,10 @@ function networkpart()
 		echo -en "you have wrote this :  "
 		echo -e " $RES"
 	fi
-	sleep .5
+	sleep $TIME
 	#question 10
-
+	echo -en "10 "
+     cat 10
 	#question 11
 	cat 11 | grep "nat" > /dev/null
 	if [ $? ==  0 ]; then
@@ -164,7 +151,7 @@ function networkpart()
 		echo -en "you have wrote this :  "
 		cat 11
 	fi
-	sleep .5
+	sleep $TIME
 	#question 12
 	RES=$(sh 12)
 	RRES=$(ipconfig getpacket en0 | grep yi | awk '{print $3}')
@@ -175,11 +162,11 @@ function networkpart()
 		echo -en "you have wrote this :  "
 		echo -e " $RES"
 	fi
-	sleep .5
+	sleep $TIME
 	#question 13
 	RES=$(cat 13)
 	echo -e "13 : $RES"
-	sleep .5
+	sleep $TIME
 	#question 14
 	cat 14 | grep "/etc/hosts" > /dev/null
 	if [ $? ==  0 ]; then
@@ -189,7 +176,7 @@ function networkpart()
 		echo -en "you have wrote this :  "
 		cat 14
 	fi
-	sleep .5
+	sleep $TIME
 	#question 15
 	RES=$(cat 15)
 	echo -e "15 : $RES"
@@ -205,7 +192,7 @@ function systempart()
 	else
 		echo -e "01 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 2
 	cat 02 | grep "hostname" > /dev/null
 	if [ $? ==  0 ]; then
@@ -213,11 +200,11 @@ function systempart()
 	else
 		echo -e "02 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 3
 	RES=$(cat 03)
 	echo -e "03 : $RES"
-	sleep 0.5
+	sleep $TIME
 	#question 4
 	cat 04 | grep "uptime" > /dev/null
 	if [ $? ==  0 ]; then
@@ -227,7 +214,7 @@ function systempart()
 		echo -en "you have wrote this :  "
 		echo -e " $RES"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 5
 	cat 05 | grep "/etc/init.d/ssh" > /dev/null
 	if [ $? ==  0 ]; then
@@ -240,7 +227,7 @@ function systempart()
 			echo -e "05 $_RED[KO] $_DEF"
 		fi
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 6
 	cat 06 | grep "/etc/init.d/ssh" > /dev/null
 	if [ $? ==  0 ]; then
@@ -253,7 +240,7 @@ function systempart()
 		 echo -e "06 $_RED[KO] $_DEF"
 	fi
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 7
 	RES=$(cat 07)
 	echo -e "07 : $RES"
@@ -264,7 +251,7 @@ function systempart()
 	else
 		echo -e "08 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#questin 9
 	RES=$(cat 09)
 	if [ "$RES" ==  "w" ] || [ "$RES" == "who" ]; then
@@ -272,7 +259,7 @@ function systempart()
 	else
 		echo -e "09 $_RED[KO] $_DEF"
 	fi;
-	sleep 0.5
+	sleep $TIME
 	#question 10
 	RES=$(cat 10)
 	if [ "$RES" ==  "fdisk -l" ] ; then
@@ -280,7 +267,7 @@ function systempart()
 	else
 		echo -e "10 $_RED[KO] $_DEF"
 	fi;
-	sleep 0.5
+	sleep $TIME
 	#question 11
 	cat 11 | grep "df -h" > /dev/null
 	if [ $? ==  0 ]; then
@@ -288,7 +275,7 @@ function systempart()
 	else
 		echo -e "11 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 12
 	cat 12 | grep "du -sh /var/*" > /dev/null
 	if [ $? ==  0 ]; then
@@ -296,7 +283,7 @@ function systempart()
 	else
 		echo -e "12 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 13
 	cat 13 | grep "ps -aux" > /dev/null
 	if [ $? ==  0 ]; then
@@ -309,7 +296,7 @@ function systempart()
 			 echo -e "13 $_RED[KO] $_DEF"
 		fi
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 14
 	cat 14 | grep "tail -f /var/log/syslog &" > /dev/null
 	if [ $? ==  0 ]; then
@@ -317,7 +304,7 @@ function systempart()
 	else
 		echo -e "14 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 15
 	cat 15 | grep "kill" > /dev/null
 	if [ $? ==  0 ]; then
@@ -325,7 +312,7 @@ function systempart()
 	else
 		echo -e "15 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 16
 	cat 16 | grep "cron" > /dev/null
 	if [ $? ==  0 ]; then
@@ -333,7 +320,7 @@ function systempart()
 	else
 		echo -e "16 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 17
 	cat 17 | grep "ssh" > /dev/null
 	if [ $? ==  0 ]; then
@@ -341,7 +328,7 @@ function systempart()
 	else
 		echo -e "17 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 18
 	cat 18 | grep "service ssh stop" > /dev/null
 	if [ $? ==  0 ]; then
@@ -349,7 +336,7 @@ function systempart()
 	else
 		echo -e "18 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 19
 	cat 19 | grep "daemon" > /dev/null
 	if [ $? ==  0 ]; then
@@ -357,7 +344,7 @@ function systempart()
 	else
 		echo -e "19 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 20
 	RES=$(sh 20) > /dev/null
 	RRES=$(cat /etc/passwd | awk -F: '{print$1}') > /dev/null
@@ -366,7 +353,7 @@ function systempart()
 	 else
 		echo -e "20 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 21
 	cat 21 | grep "cat /etc/passwd" > /dev/null
 	if [ $? ==  0 ]; then
@@ -374,7 +361,7 @@ function systempart()
 	else
 		echo -e "21 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 22
 	cat 22 | grep "adduser" > /dev/null
 	if [ $? ==  0 ]; then
@@ -382,11 +369,11 @@ function systempart()
 	 else
 		echo -e "22 $_RED[KO] $_DEF"
 	fi
-	sleep 0.5
+	sleep $TIME
 	#question 23
 	ES=$(cat 23) > /dev/null
 	echo -e "23 : $ES"
-		sleep 0.5
+		sleep $TIME
 	#question 24
 	cat 24 | grep "dpkg" > /dev/null
 	if [ $? ==  0 ]; then
@@ -399,21 +386,13 @@ function systempart()
 function scriptpart()
 {
 	cd "$PATHE/scripts/"
-	echo -e "--------01 output----------"
-	sh 01
-	echo -ne "\n"
-	i=10
-	for i in {10..0}
-	do
-		echo -ne "\rWaiting ${i}s..                                            "
-		sleep .8
-	done
-	echo -e "\r--------01 content---------"
+
+	echo -e "\r01 content"
 	cat 01
-	echo -e "\n--------02 content-------------"
+	echo -e "\n02 content"
 	cat 02
 	#sleep 10
-	echo -e "\n--------03 (custom)--------"
+	echo -e "\n03 custom"
 	cat 03
 }
 
@@ -443,11 +422,28 @@ function creditspart()
 	echo -e "$_DEF"
 }
 
-PATH=~/goinfre/COUCOU;
+	cd ~/goinfre
+	rm -rf COUCOU
+	git clone $GIT COUCOU
+	cd COUCOU
+	cd ~/projet/init/.
 
-	cd $SPWD
-			networkpart
-			systempart
-			scriptpart
-			creditspart
+	PATHE=~/goinfre/COUCOU;
+
 clear
+	cd $SPWD
+			echo "----------network----------"
+			networkpart
+			echo -e "\n\n----------system----------"
+			systempart
+			echo -e "\n\n----------script----------"
+			scriptpart
+
+			echo -e "\n\n\n\n"
+				i=10000000
+	for i in {1000000..0}
+	do
+		echo -ne "\rWaiting ${i}s..                                            "
+		sleep 0.1
+	done
+			creditspart
