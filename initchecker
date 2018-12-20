@@ -11,11 +11,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-GIT=
+GIT=----------ton repos----------
+TIME=0.01
+FILE=COUCOU
 
 #Un KO n est pas une reponsse fausse . toujours verifier se que les fonciton renvois .
 #Je decline toute responsabilitees pour toute correction fausser par initchecker.
-
 
 # Text format
 _DEF='\033[0m'
@@ -46,7 +47,6 @@ _IGREY='\033[47m'
 
 # Start PWD
 SPWD=$(pwd)
-TIME=0.01
 
 function header()
 {
@@ -428,10 +428,9 @@ function creditspart()
 }
 
 	cd ~/goinfre
-	rm -rf COUCOU
-	git clone $GIT COUCOU
-	cd COUCOU
-	cd ~/projet/init/.
+	rm -rf $FILE
+	git clone $GIT $FILE
+	cd $FILE
 
 	PATHE=~/goinfre/COUCOU;
 
