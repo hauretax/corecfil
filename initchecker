@@ -13,6 +13,10 @@
 
 GIT=vogsphere@vogsphere.42.fr:intra/2018/activities/init/hutricot
 
+#Un KO n est pas une reponsse fausse . toujours verifier se que les fonciton renvois .
+#Je decline toute responsabilitees pour toute correction fausser par initchecker.
+
+
 # Text format
 _DEF='\033[0m'
 _GRAS='\033[1m'
@@ -42,7 +46,7 @@ _IGREY='\033[47m'
 
 # Start PWD
 SPWD=$(pwd)
-TIME=0.1
+TIME=0.01
 
 function header()
 {
@@ -406,6 +410,7 @@ function creditspart()
 	echo  ""
 	echo  "@judumay"
 	echo  "@lroux"
+	echo  "@hauretax"
 	echo  ""
 	echo "          ___   ____"
 	echo "        /' --;^/ ,-_\     \ | /"
@@ -438,12 +443,13 @@ clear
 			systempart
 			echo -e "\n\n----------script----------"
 			scriptpart
-
+			
 			echo -e "\n\n\n\n"
 				i=10000000
-	for i in {1000000..0}
+	for i in {10000..0}
 	do
 		echo -ne "\rWaiting ${i}s..                                            "
-		sleep 0.1
+		sleep 0.01
+
 	done
 			creditspart
