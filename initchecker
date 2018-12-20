@@ -11,7 +11,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-GIT=vogsphere@vogsphere.42.fr:intra/2018/activities/init/hutricot
+GIT=
 
 #Un KO n est pas une reponsse fausse . toujours verifier se que les fonciton renvois .
 #Je decline toute responsabilitees pour toute correction fausser par initchecker.
